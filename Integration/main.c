@@ -1,4 +1,5 @@
 #include "enigme.h"
+#include "minimap.h"
 
 #include <stdio.h>
 #include <stdlib.h>
