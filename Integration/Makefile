@@ -1,7 +1,6 @@
-game:main.o enigme.o
-	gcc main.o enigme.o -o game -lSDL -lSDL_ttf -lSDL_image -lSDL_mixer -g
+prog:main.o minimap.o 
+	gcc main.o minimap.o -o prog -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g
 main.o:main.c
 	gcc -c main.c -g
-enigme.o:enigme.c
-	gcc -c enigme.c -g
-
+minimap.o:minimap.c
+	gcc -c minimap.c -g
