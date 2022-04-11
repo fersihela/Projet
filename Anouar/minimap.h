@@ -39,6 +39,17 @@ int min, sec;
 }temps;
 
 
+typedef struct Score 
+{ 
+   SDL_Surface *fondScore;
+   SDL_Surface *texteScore;
+   SDL_Rect posFond;
+   SDL_Rect posScore;
+   int scoreActuel;
+   TTF_Font *police;
+   
+}Score;
+
 
 
 void initmap( minimap *m);
