@@ -1,5 +1,5 @@
-#ifndef benaoun_et3_Multijoueur_H_
-#define benaoun_et3_Multijoueur_H_
+#ifndef minimap_H_INCLUDED
+#define minimap_H_INCLUDED	
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
