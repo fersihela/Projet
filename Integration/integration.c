@@ -7,7 +7,7 @@
 #include "integration.h"
 void initialiser_back(back *B)
  {
-      (*B).img_back=IMG_Load("back.png");
+      (*B).img_back=IMG_Load("image/back.png");
          if((*B).img_back==NULL)
            {
             printf("loading error ! %s\n", SDL_GetError());
@@ -19,7 +19,7 @@ void initialiser_back(back *B)
 
 void initPerso(perso *p)
   
-{ p->spritesheet=IMG_Load("perso2.png");
+{ p->spritesheet=IMG_Load("image/perso2.png");
     
     p->position.x=50;    //position p1 (back du jeu)
     p->position.y=270;
