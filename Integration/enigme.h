@@ -54,7 +54,8 @@ SDL_Rect pos_soundon;
 }mute;
 //------------------------------------------------------
 void initialisation(enigme *e,volume *O,mute *m,temps *t,SDL_Surface *anim[]);
-void afficher_temps(temps *t,SDL_Surface *screen,enigme *en);
+void afficher_temps_enigme(temps *t,SDL_Surface *screen,enigme *en);
+void initialiser_temps_enigme(temps *t);
 void alea_enig_fichier(enigme *en );
 void blit_enig_fichier ( enigme *en, SDL_Surface* screen,mute m,volume O);
 void init_enig_fichier( enigme * en);

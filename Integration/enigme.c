@@ -33,7 +33,7 @@ t->textColor.b=255;
 t->font=TTF_OpenFont("RES/REP2CN__.ttf",75);
 }
 //--------------------------TEMPS----------------------------------
-void initialiser_temps(temps *t)
+void initialiser_temps_enigme(temps *t)
 {
  //t->texte = NULL;
  t->position.x=700;
@@ -96,7 +96,7 @@ init_enig_fichier(e);
 initmusic();
 initialiser_volume(O);
 initialiser_mute(m);
-initialiser_temps(t);
+initialiser_temps_enigme(t);
 initanimation(anim);
 }
 //----------------------ENIGME----------------------------
@@ -166,7 +166,7 @@ void afficheanimation(SDL_Surface* screen,enigme *B,SDL_Surface *anim[4])
 
 }
 //-----------------------------AFFICHER TEMPS----------------------
-void afficher_temps(temps *t,SDL_Surface *screen,enigme *en)
+void afficher_temps_enigme(temps *t,SDL_Surface *screen,enigme *en)
 {	
     	time(&(t->t2));// temps actuel
 	t->secondesEcoulees = t->t2 - t->t1;
@@ -243,7 +243,7 @@ int volume=20,Vol;
 		while(continuer == 1)	
 			{
 			blit_enig_fichier (en,screen,m,O);
-			afficher_temps(&t,screen,en);
+			afficher_temps_enigme(&t,screen,en);
 
 
 		    	SDL_PollEvent(&event);

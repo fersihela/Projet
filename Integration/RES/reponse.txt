@@ -1,6 +1,6 @@
-1-2000 2-1960 3-1975 4-test 1 
-1-IOS11.2 2-Android7.0 3-windows7 4-test 2  
-1-Spanish 2-English 3-Chinese 4-test 1  
-1-SSD 2-Internal-HD 3-External-HDD 4-test 1    
-1-test 2-test 3-test 4-test 1 
-1-test 2-test 3-test 4-test 1  
+1-Ifriqiya 2-Carthage 3-Afrique 4-Tunisina 1 
+1-20Mars1957 2-20Mars1958 3-20Mars1956 4-20Mars1959 3  
+1-12Mai1888 2-12Mai1881 3-12Mai1880 4-12Mai1886 2   
+1-Barbarous 2-Barbarie 3-Barbaresques 4-Barbarra 1    
+1-2ans 2-5ans 3-4ans 4-3ans 1 
+1-14 2-34 3-27 4-24 4  
