@@ -8,6 +8,7 @@
 #include <time.h>
 #include "integration.h"
 #include "enigme.h"
+#include "minimap.h"
 
 #define SCREEN_W 1620
 #define SCREEN_H 880
@@ -17,7 +18,7 @@ int main()
 {
  TTF_Init();
 //declaration
-SDL_Surface *screen;
+SDL_Surface *screen=NULL;
 SDL_Surface *texte1=NULL;  //texte:score
 SDL_Surface *number1=NULL; //score(valeur)
 SDL_Surface *texte2=NULL;
@@ -37,17 +38,43 @@ TTF_Font *text2=NULL;  //vie 1
 back b;
 Ennemi e;
 Ennemi1 e1; 
-perso p;
+perso p,pM;
+minimap m;
 int l,f;
 int done=1,droite=0,gauche=0,up=0,dir=2;
 SDL_Event event;
 Uint32 t_prev,dt;
+temps t;
+
 //initialisation
 SDL_Init(SDL_INIT_VIDEO);
 TTF_Init();
 screen=SDL_SetVideoMode(SCREEN_W,SCREEN_H,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+if(screen==NULL)
+    	{
+        	printf("ERREUR: %s\n", SDL_GetError());
+        	return 1;
+       }
 initPerso(&p);
 initialiser_back(&b);
+initmap( &m);
+initialiser_temps(&t);
+
+
+
+//Son continu
+	Mix_Music* music; 
+if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024)==-1)
+{
+  printf("NO AUDIO %s\n",Mix_GetError());
+}
+music = Mix_LoadMUS("most-epic-battle-music-warriors-to-the-end-mix-by-epic-score.mp3"); //load the music 
+
+Mix_PlayMusic(music,-1);
+
+
+
+
 // affiche_back(back B, SDL_Surface* screen)	;
 e=initEnnemi(e);
 e1=initEnnemi1(e1);
@@ -98,6 +125,9 @@ affiche_back(b,screen)	;
 afficherPerso(p,screen);
 afficherEnnemi(e,screen);//affichage de l'ennemi pirate
 afficherEnnemi1(e1,screen);//affichage de l'ennemi perroquet
+afficher_temps(&t,screen);
+afficherminimap ( m,screen);
+SDL_BlitSurface(pM.sprite, NULL, screen, &pM.position_perso);//afficher perso dans minimap
  e = animerEnnemi (e, l);//animation de l'ennemi pirate
         e1 = animerEnnemi1 (e1, f);//animation de l'ennemi perroquet
         l = Collision_Bounding_Box (p, e);//retourner la valeur 1 en cas de collision du pirate avec perso
@@ -228,8 +258,11 @@ freee(&enigme);
 libereranimation(anim_enig);
 //_________________________
 TTF_Quit();
+free_minimap (&m);
+free_temps(&t,screen);
+SDL_FreeSurface(pM.sprite);
+Mix_FreeMusic(music);
 atexit(SDL_Quit);
 SDL_Quit();
     return 0;
 }
-
