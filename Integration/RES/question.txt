@@ -1,6 +1,6 @@
-Q1 Quel est l'ancien nom de la Tunisie
+Q1 Quel est l ancien nom de la Tunisie
 Q2 Quelle est la date de fondation de la Tunisie
 Q3 Quelle est la date la colonisation de la Tunisie
-Q4 Qui est le premier pirate Tunisien
-Q5 L'élection se déroule chaque 
-Q6 Combien d'états compte la tunisie  
+Q4 Qui est le premier pirate tunisien
+Q5 L election se deroule chaque
+Q6 Combien d etats compte la Tunisie

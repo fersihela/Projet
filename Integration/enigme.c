@@ -30,7 +30,7 @@ void initText(enigme *t)
 t->textColor.r=255;
 t->textColor.g=255;
 t->textColor.b=255;
-t->font=TTF_OpenFont("RES/REP2CN__.ttf",75);
+t->font=TTF_OpenFont("RES/Chalkboy.ttf",65);
 }
 //--------------------------TEMPS----------------------------------
 void initialiser_temps_enigme(temps *t)
@@ -38,7 +38,7 @@ void initialiser_temps_enigme(temps *t)
  //t->texte = NULL;
  t->position.x=700;
  t->position.y=10;
- t->police = TTF_OpenFont("RES/REP2CN__.ttf",75);
+ t->police = TTF_OpenFont("RES/Chalkboy.ttf",75);
  strcpy( t->entree,"");
 (t->secondesEcoulees)=0;
 time(&(t->t1));	 //temps du debut
@@ -98,6 +98,7 @@ initialiser_volume(O);
 initialiser_mute(m);
 initialiser_temps_enigme(t);
 initanimation(anim);
+e->resolu=0;
 }
 //----------------------ENIGME----------------------------
 void init_enig_fichier( enigme * en )
@@ -138,7 +139,7 @@ void init_enig_fichier( enigme * en )
 
 
     en->Question = NULL;
-    en->question_Pos.x=400;
+    en->question_Pos.x=300;
     en->question_Pos.y=100;
 
     en->alea = 0;
@@ -161,7 +162,7 @@ void afficheanimation(SDL_Surface* screen,enigme *B,SDL_Surface *anim[4])
 	{
 	SDL_BlitSurface(anim[ianimation],NULL,screen,&B->pos_back);
 	SDL_Flip(screen);
-	SDL_Delay(200);
+	SDL_Delay(600);
 	}
 
 }
@@ -171,8 +172,8 @@ void afficher_temps_enigme(temps *t,SDL_Surface *screen,enigme *en)
     	time(&(t->t2));// temps actuel
 	t->secondesEcoulees = t->t2 - t->t1;
         t->min=0-((t->secondesEcoulees/60)%60);
-	t->sec= 10-((t->secondesEcoulees)%10);
-	sprintf(t->entree,"%02d:%02d",t->min,t->sec);
+	t->sec= 20-((t->secondesEcoulees)%60);
+	sprintf(t->entree,"%02d %02d",t->min,t->sec);
         t->texte = TTF_RenderText_Blended(en->font,t->entree, en->textColor);
 	SDL_BlitSurface(t->texte, NULL, screen, &(t->position)); /* Blit du texte */	
 }
@@ -215,7 +216,7 @@ void alea_enig_fichier(enigme *en)
 			if ( caracterelu_question == '\n')
 				ligne++;
 		}
-		fgets(ques,45,fichier);
+		fgets(ques,100,fichier);
 		fclose(fichier);
 		while ( caracterelu_reponses!=EOF && ligne_reponse < en->alea )
 		{
@@ -244,7 +245,10 @@ int volume=20,Vol;
 			{
 			blit_enig_fichier (en,screen,m,O);
 			afficher_temps_enigme(&t,screen,en);
-
+if ((t.min==0)&&(t.sec==0))
+{	    afficheanimation(screen,en,anim);
+		continuer=0;
+}
 
 		    	SDL_PollEvent(&event);
 	switch(event.type)
@@ -347,16 +351,18 @@ if ( en->solution == choix )
         {
             SDL_BlitSurface(en->correct,NULL, screen, &en->position_correct );
             SDL_Flip(screen);
+		en->resolu=1;continuer=0;
             SDL_Delay(3000);
-            continuer = 0;
+
         }
         else 
         {
             SDL_BlitSurface(en->wrong,NULL, screen, &en->position_wrong );
-	    afficheanimation(screen,en,anim);
+
             SDL_Flip(screen);
+		en->resolu=2;continuer=0;
             SDL_Delay(3000);
-            continuer = 0;
+
         }
 }
 }}

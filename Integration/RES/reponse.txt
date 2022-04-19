@@ -1,6 +1,6 @@
-1-Ifriqiya 2-Carthage 3-Afrique 4-Tunisina 1 
-1-20Mars1957 2-20Mars1958 3-20Mars1956 4-20Mars1959 3  
-1-12Mai1888 2-12Mai1881 3-12Mai1880 4-12Mai1886 2   
-1-Barbarous 2-Barbarie 3-Barbaresques 4-Barbarra 1    
-1-2ans 2-5ans 3-4ans 4-3ans 1 
-1-14 2-34 3-27 4-24 4  
+Ifriqiya Carthage Afrique Tunisina 1 
+20Mars1957 20Mars1958 20Mars1956 20Mars1959 3  
+12Mai1888 12Mai1881 12Mai1880 12Mai1886 2   
+Barbarous Barbarie Barbaresques Barbarra 1    
+2ans 5ans 4ans 3ans 1 
+14 34 27 24 4  
