@@ -22,25 +22,6 @@ typedef struct
 	SDL_Surface *sprite;
 }minimap;
 
-
-
-typedef struct temps
-{
-SDL_Surface *texte;
- SDL_Rect position;
-  
-    TTF_Font *police ;
-
- char entree[100];
- int secondesEcoulees;
-SDL_Color couleurBlanche;
-time_t t1,t2;
-int min, sec;
-}temps;
-
-
-
-
 void initmap( minimap *m);
 void afficherminimap (minimap m, SDL_Surface * screen);
 void free_minimap (minimap *m);
