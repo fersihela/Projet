@@ -29,7 +29,7 @@ void initialiser_temps(temps *t)
  t->position.x=1400;
    t->position.y=30;
      t->police = NULL;
-  t->police = TTF_OpenFont("Chalkboy.ttf", 40);
+  t->police = TTF_OpenFont("RES/Chalkboy.ttf", 40);
     strcpy( t->entree,"");
 (t->secondesEcoulees)=0;
 time(&(t->t1));	 //temps du debut

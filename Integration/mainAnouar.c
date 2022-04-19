@@ -30,13 +30,13 @@ position_BG.y=0;
 
        masked=IMG_Load("RES/map1_masked.png");
 
-    p.sprite=IMG_Load("1r1.png");
+    p.sprite=IMG_Load("RES/1r1.png");
     p.position_perso.x=95;
     p.position_perso.y=87;
 
 
 
-    pM.sprite=IMG_Load("1r1_3.png");
+    pM.sprite=IMG_Load("RES/1r1_3.png");
     pM.position_perso.x=0;
     pM.position_perso.y=350;
 
