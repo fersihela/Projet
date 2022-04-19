@@ -9,6 +9,9 @@
 #include "integration.h"
 #include "enigme.h"
 #include "minimap.h"
+#include "background.h"
+#include "collisionparfaite.h"
+
 
 #define SCREEN_W 1620
 #define SCREEN_H 880
@@ -23,7 +26,8 @@ SDL_Surface *texte1=NULL;  //texte:score
 SDL_Surface *number1=NULL; //score(valeur)
 SDL_Surface *texte2=NULL;
 TTF_Font *police=NULL; //font du score
-TTF_Font *text2=NULL;  //vie 1   
+TTF_Font *text2=NULL;  //vie 1  
+SDL_Surface *screen=NULL; 
 
 //enigme texte
 	enigme enigme;
@@ -45,6 +49,10 @@ int done=1,droite=0,gauche=0,up=0,dir=2;
 SDL_Event event;
 Uint32 t_prev,dt;
 temps t;
+int continuer=1,input=0;
+background ba,bm;
+Personne perso;
+SDL_Event event;
 
 //initialisation
 SDL_Init(SDL_INIT_VIDEO);
@@ -55,10 +63,14 @@ if(screen==NULL)
         	printf("ERREUR: %s\n", SDL_GetError());
         	return 1;
        }
+
 initPerso(&p);
 initialiser_back(&b);
 initmap( &m);
 initialiser_temps(&t);
+initialisation_back(&ba);
+initBackMasque(&bm);
+initialiserperso(&perso);
 
 
 
@@ -145,6 +157,17 @@ SDL_BlitSurface(number1, NULL, screen,&p.score_perso.position_number);//score(va
  SDL_Flip(screen);//mise à jour
 SDL_Delay(100); //attente
 t_prev = SDL_GetTicks();
+while (continuer)
+	{	afficheBack(bm,screen);
+		afficheBack2(ba,screen);
+		afficher_perso(screen,perso);		
+		deplacer_perso(&perso,event);
+		//displaymoon(ba,ecran);
+		//animerBackground(ba);
+ 		//collision(screen,&perso);
+		
+		SDL_PollEvent(&event);
+		SDL_Flip(screen);
        
        
 //input
@@ -196,6 +219,36 @@ switch (event.key.keysym.sym)
 break;
 }  
 }
+//eya 
+switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+                break;
+            case SDL_KEYDOWN:
+                switch(event.key.keysym.sym)
+                {
+			case SDLK_RIGHT:
+			 	input = 1;
+			 break;
+                        case SDLK_LEFT:
+                   		input = 2;
+                   
+                        break;
+			 case SDLK_UP:
+			 	input = 3;
+		  				 
+                        break;
+ 			 case SDLK_DOWN:
+ 			 	input = 4;
+ 		  				 
+                        break;	
+      		 }
+      		 	
+            break;
+       
+
+ 	} 
 
 // update
 
@@ -251,6 +304,66 @@ if (p.position.y>=270)
     p.position.y=270;
 }
 
+}
+if(input == 1)
+{
+				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+				deplacer_perso(&perso,event);
+				else 		
+				{
+				scrolling(&ba,1);
+				scrolling(&bm,1);
+				//collision(screen,&perso);
+				}	
+input =0;
+
+}
+
+if(input == 2)
+{
+				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+				deplacer_perso(&perso,event);
+				else 
+				{
+				scrolling(&ba,2);	
+				scrolling(&bm,2);
+				//collision(screen,&perso);
+				}
+input =0;
+}
+
+if(input == 3)
+{
+				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+                                deplacer_perso(&perso,event);
+	
+				else			
+				scrolling(&ba,3);		
+				scrolling(&bm,3);
+				//collision(screen,&perso);
+input =0;
+}
+
+if(input == 4)
+{
+				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+				deplacer_perso(&perso,event);
+				else 
+				scrolling(&ba,4);		
+				scrolling(&bm,4);
+				//collision(screen,&perso);
+input =0;
+			
+			
+}
+}
+SDL_Quit();
+
+	return 1;
 }
 SDL_FreeSurface(p.spritesheet);
 //liberation enigme texte
