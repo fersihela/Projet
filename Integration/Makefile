@@ -1,8 +1,10 @@
-prog:main.o minimap.o enigme.o
-	gcc main.o minimap.o -o prog -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g
-main.o:main.c
-	gcc -c main.c -g
+prog:mainfinal.o minimap.o enigme.o integration.o
+	gcc mainfinal.o minimap.o integration.o -o prog -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g
+mainfinal.o:main.c
+	gcc -c mainfinal.c -g
 minimap.o:minimap.c
 	gcc -c minimap.c -g
 enigme.o:enigme.c
 	gcc -c enigme.c -g
+integration.o:integration.c
+	gcc -c integration.c -g
