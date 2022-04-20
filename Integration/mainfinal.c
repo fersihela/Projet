@@ -9,9 +9,12 @@
 #include "integration.h"
 #include "enigme.h"
 #include "minimap.h"
+#include "background.h"
+#include "collisionparfaite.h"
 
-#define SCREEN_W 1620
-#define SCREEN_H 880
+
+#define SCREEN_W 1200
+#define SCREEN_H 800
 
 
 int main()
@@ -23,7 +26,8 @@ SDL_Surface *texte1=NULL;  //texte:score
 SDL_Surface *number1=NULL; //score(valeur)
 SDL_Surface *texte2=NULL;
 TTF_Font *police=NULL; //font du score
-TTF_Font *text2=NULL;  //vie 1   
+TTF_Font *text2=NULL;  //vie 1  
+SDL_Surface *screen=NULL; 
 
 //enigme texte
 	enigme enigme;
@@ -41,10 +45,14 @@ Ennemi1 e1;
 perso p,pM;
 minimap m;
 int l,f;
-int done=1,droite=0,gauche=0,up=0,dir=2;
+int done=1,droite=0,gauche=0,up=0,dir=2,input;
 SDL_Event event;
 Uint32 t_prev,dt;
 temps t;
+int continuer=1,input=0;
+background ba,bm;
+Personne perso;
+SDL_Event event;
 
 //initialisation
 SDL_Init(SDL_INIT_VIDEO);
@@ -55,10 +63,14 @@ if(screen==NULL)
         	printf("ERREUR: %s\n", SDL_GetError());
         	return 1;
        }
+
 initPerso(&p);
 initialiser_back(&b);
 initmap( &m);
 initialiser_temps(&t);
+initialisation_back(&ba);
+initBackMasque(&bm);
+
 
 
 
@@ -145,8 +157,7 @@ SDL_BlitSurface(number1, NULL, screen,&p.score_perso.position_number);//score(va
  SDL_Flip(screen);//mise à jour
 SDL_Delay(100); //attente
 t_prev = SDL_GetTicks();
-       
-       
+     
 //input
 while(SDL_PollEvent(&event))
 {
@@ -162,13 +173,21 @@ case SDL_KEYDOWN:
     {
     case  SDLK_RIGHT:
          droite=1;
+         input = 1;
         break;
     case  SDLK_LEFT:
        gauche=1;
+        input = 2;
         break; 
     case SDLK_UP:
         up=1;
+       input = 3;
+        break;  
+case SDLK_DOWN:
+        
+       input =4;
         break;    
+ 
     }
 break;
 
@@ -179,16 +198,19 @@ switch (event.key.keysym.sym)
              droite=0;   //p1 stable avec direction droite
               dir=2;
              p.vitesse=0;
+           
         break;
 
     case  SDLK_LEFT:        
        gauche=0;    //p1 stable avec  direction gauche
        p.vitesse=0;
         dir=3;
+        
         break; 
 
     case SDLK_UP:
         up=0;
+      
         break;   
    
     }
@@ -196,24 +218,24 @@ switch (event.key.keysym.sym)
 break;
 }  
 }
-
+   		                     
 // update
 
 
 if (droite==1)      
 { 
-    p.vitesse=50;
+    p.vitesse=10;
     p.acceleration+=0.5;
     p.direction=0;
     droite =0;
 }
 if (gauche==1)    
 {
-    p.vitesse=50;
+    p.vitesse=10;
     p.acceleration+=0.5;
     p.direction=1;
 }
-dt = SDL_GetTicks() - t_prev;
+
 if ((Collision_Bounding_Box(p,e)==0)&&(Collision_Bounding_Box1( p,e1)==0))
  {    deplacerPerso(&p,dt);
      animerPerso(&p);
@@ -230,28 +252,91 @@ else if ((p.vie_perso.nbvie==0)||(p.score_perso.valscore<0))
 done=0;
 }
 
-
-
 if (up==1) 
 saut(&p);
-p.acceleration -=0.27; 
+
+p.acceleration -=0.3;//deceleration p1
+
 if (p.acceleration<0 ) 
 p.acceleration=0; //   controler l'intervalle de l'acceleration p1
 if (p.acceleration>4) 
 p.acceleration=4;
+
+SDL_Delay(1);
+dt = SDL_GetTicks() - t_prev;   //le temps ecoulé depuis initialisation du boucle du jeu
+
 if ((p.vitesse==0)&&(p.acceleration==0))   
 {
-    p.direction=dir;
+    p.direction=dir;    
 }
-p.position.y+=p.vitesseV;
-p.vitesseV+=10;
-if (p.position.y>=270)
+p.position.y += p.vitesseV;  
+p.vitesseV += 10; 
+if (p.position.y >=270)
 {
     p.vitesseV=0;
-    p.position.y=270;
+    p.position.y=270; 
 }
 
+if(input == 1)
+{
+				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+				 {deplacerPerso(&p,dt);
+                                 animerPerso(&p);}
+				else 		
+				{
+				scrolling(&ba,1);
+				scrolling(&bm,1);
+				//collision(screen,&perso);
+				}	
+input =0;
+
 }
+
+if(input == 2)
+{
+				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+				 {deplacerPerso(&p,dt);
+                                 animerPerso(&p);}
+				else 
+				{
+				scrolling(&ba,2);	
+				scrolling(&bm,2);
+				//collision(screen,&perso);
+				}
+input =0;
+}
+
+if(input == 3)
+{
+				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+                               { deplacerPerso(&p,dt);
+	                         animerPerso(&p);}
+				else			
+				{scrolling(&ba,3);		
+				scrolling(&bm,3);}
+				//collision(screen,&perso);
+input =0;
+}
+
+if(input == 4)
+{
+				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+
+				{ deplacerPerso(&p,dt);
+                                  animerPerso(&p);}
+				else 
+				{scrolling(&ba,4);		
+				scrolling(&bm,4);}
+				//collision(screen,&perso);
+input =0;
+			
+			
+}
+}
+
 SDL_FreeSurface(p.spritesheet);
 //liberation enigme texte
 freee(&enigme);
