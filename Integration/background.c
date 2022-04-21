@@ -5,7 +5,7 @@
 void initBackMasque (background *b)
 {
 //background
-b->imgback=IMG_Load("mapMasque.png");
+b->imgback=IMG_Load("RES/mapMasque.png");
 b->posback.x=0;
 b->posback.y=0;
 
@@ -20,7 +20,7 @@ b->camera.h=SCREEN_H;
 void initBack2 (background *b)
 {
 //background2
-b->imgback=IMG_Load("map.png");
+b->imgback=IMG_Load("RES/map.png");
 b->posback2.x=0;
 b->posback2.y=0;
 //camera2
