@@ -7,7 +7,7 @@
 #include "integration.h"
 void initialiser_back(back *B)
  {
-      (*B).img_back=IMG_Load("image/back.png");
+      (*B).img_back=IMG_Load("RES/back.png");
          if((*B).img_back==NULL)
            {
             printf("loading error ! %s\n", SDL_GetError());
@@ -19,7 +19,7 @@ void initialiser_back(back *B)
 
 void initPerso(perso *p)
   
-{ p->spritesheet=IMG_Load("image/perso2.png");
+{ p->spritesheet=IMG_Load("RES/perso2.png");
     
     p->position.x=50;    //position p1 (back du jeu)
     p->position.y=270;
@@ -41,15 +41,15 @@ p->position.h=250;    //position p1 (back du jeu)
 
 Ennemi initEnnemi( Ennemi e)
  {
-  e.image[0]=IMG_Load("rpg1.png");//loading des images dirigées vers la droite
-  e.image[1]=IMG_Load("rpg2.png");
-  e.image[2]=IMG_Load("rpg3.png");
+  e.image[0]=IMG_Load("RES/rpg1.png");//loading des images dirigées vers la droite
+  e.image[1]=IMG_Load("RES/rpg2.png");
+  e.image[2]=IMG_Load("RES/rpg3.png");
 
   e.Hit=IMG_Load("imagedehit.png");//loading de l'image de hit
 
-  e.image2[0]=IMG_Load("rpd1.png");//loading des images dirigées vers la gauche
-  e.image2[1]=IMG_Load("rpd2.png");
-  e.image2[2]=IMG_Load("rpd3.png");
+  e.image2[0]=IMG_Load("RES/rpd1.png");//loading des images dirigées vers la gauche
+  e.image2[1]=IMG_Load("RES/rpd2.png");
+  e.image2[2]=IMG_Load("RES/rpd3.png");
 
   e.imageActuel=e.image[0];//loading de l'image avec laquelle on commence l'animation
  
@@ -68,15 +68,15 @@ Ennemi initEnnemi( Ennemi e)
 
 Ennemi1 initEnnemi1( Ennemi1 e1)
 {
-  e1.image1[0]=IMG_Load("a.png");
-  e1.image1[1]=IMG_Load("b.png");
-  e1.image1[2]=IMG_Load("c.png");
+  e1.image1[0]=IMG_Load("RES/a.png");
+  e1.image1[1]=IMG_Load("RES/b.png");
+  e1.image1[2]=IMG_Load("RES/c.png");
 
-  e1.Hit=IMG_Load("hit.png");
+  e1.Hit=IMG_Load("RES/hit.png");
 
-  e1.image3[0]=IMG_Load("d.png");
-  e1.image3[1]=IMG_Load("e.png");
-  e1.image3[2]=IMG_Load("f.png");
+  e1.image3[0]=IMG_Load("RES/d.png");
+  e1.image3[1]=IMG_Load("RES/e.png");
+  e1.image3[2]=IMG_Load("RES/f.png");
  
   e1.imageActuel=e1.image1[0];
 
