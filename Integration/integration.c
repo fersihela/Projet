@@ -37,6 +37,36 @@ p->position.h=250;    //position p1 (back du jeu)
     p->pos_sprite.y= 200;
     p->pos_sprite.h= 100;
     p->pos_sprite.w= 100;
+// initialiser score
+p->score_perso.police = TTF_OpenFont("image/REP2CN__.ttf", 35); //chargement d'une police avec taille
+SDL_Color blanco={255,255,255}; 
+p->score_perso.position_txt.x=15;
+p->score_perso.position_txt.y=20;
+p->score_perso.texte1= TTF_RenderText_Blended(p->score_perso.police,"score :",blanco);  
+p->score_perso.number[20];
+p->score_perso.valscore=1450;
+sprintf(p->score_perso.number, "%d",(p->score_perso.valscore));//conversion entier en une chaine de caractère
+p->score_perso.number1= TTF_RenderText_Blended(p->score_perso.police,p->score_perso.number,blanco);
+p->score_perso.position_number.x=120;
+p->score_perso.position_number.y=20;
+TTF_CloseFont(p->score_perso.police);
+
+
+//initialiser vie 1
+p->vie_perso.text=TTF_OpenFont("image/REP2CN__.ttf",35); //chargement police/taille
+SDL_Color blanc={255,255,255};
+p->vie_perso.position_texte.x=600;
+p->vie_perso.position_texte.y=20;
+p->vie_perso.texte= TTF_RenderText_Blended(p->vie_perso.text,"Vie1 :",blanc); //ecriture
+TTF_CloseFont(p->vie_perso.text);
+p->vie_perso.image_vie[0]=IMG_Load("image/vie03.png") ; //chargement d'image vie p1
+p->vie_perso.image_vie[1]=IMG_Load("image/vie02.png") ;
+p->vie_perso.image_vie[2]=IMG_Load("image/vie01.png") ;
+p->vie_perso.image_vie[3]=IMG_Load("image/vie00.png") ;
+
+ p->vie_perso.position_vie.x=680;   //initialisation de position
+ p->vie_perso.position_vie.y=20;
+ p->vie_perso.nbvie=3;
 }
 
 Ennemi initEnnemi( Ennemi e)
@@ -92,7 +122,8 @@ Ennemi1 initEnnemi1( Ennemi1 e1)
 }
 void affiche_back(back B, SDL_Surface* screen)	
  {
-   SDL_BlitSurface(B.img_back,NULL,screen,&B.pos_back);
+SDL_BlitSurface(B.img_back,NULL,screen,&B.pos_back);
+
  }
 
 void afficherEnnemi(Ennemi e,SDL_Surface* screen)
@@ -227,7 +258,12 @@ return col1;
 
 
 void afficherPerso(perso p, SDL_Surface * screen){
-    SDL_BlitSurface(p.spritesheet,&p.pos_sprite,screen,&p.position);//affichage du p ( chaque frame) à partir sprite sheet 
+SDL_BlitSurface(p.spritesheet,&p.pos_sprite,screen,&p.position);//affichage du p ( chaque frame) à partir sprite sheet 
+SDL_BlitSurface(p.score_perso.texte1, NULL,screen,&p.score_perso.position_txt);// afficher score(texte)
+SDL_BlitSurface(p.score_perso.number1, NULL, screen,&p.score_perso.position_number);// afficher score
+
+SDL_BlitSurface(p.vie_perso.image_vie[p.vie_perso.nbvie],NULL,screen,(&p.vie_perso.position_vie));  //affichage vie p1
+SDL_BlitSurface(p.vie_perso.texte,NULL,screen,&(p.vie_perso.position_texte)); // vie 1 
 }
 
 

@@ -2,7 +2,7 @@
 
 void initialiserperso(Personne *perso)
 {	
-	perso->image_p=IMG_Load("RES/hero.bmp");
+	perso->image_p=IMG_Load("hero.bmp");
 	perso->pos_perso.x=40;
 	perso->pos_perso.y=600;
 	perso->pos_perso.w=120;

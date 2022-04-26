@@ -9,19 +9,22 @@
 #include <SDL/SDL_mixer.h>
 
 typedef struct {
-
 SDL_Surface *image_vie[5]; 
 SDL_Rect position_vie ;
 int nbvie;
-SDL_Rect position_texte;
+SDL_Rect position_texte; 
+TTF_Font *text;
+SDL_Surface *texte;
 }vie;
 typedef struct {
 char number[20]; 
 SDL_Rect position_txt; //texte(score)
-SDL_Rect position_number;  
+SDL_Rect position_number; 
+TTF_Font *police;
+SDL_Surface *texte1; 
+SDL_Surface *number1; 
 int valscore ;
 }score;
-
 typedef struct 
 {
 SDL_Surface *spritesheet;

@@ -1,5 +1,5 @@
-#ifndef benaoun_et3_Multijoueur_H_
-#define benaoun_et3_Multijoueur_H_
+#ifndef minimap_H_INCLUDED
+#define minimap_H_INCLUDED	
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +21,36 @@ typedef struct
 	SDL_Rect position_mini;
 	SDL_Surface *sprite;
 }minimap;
+
+
+
+typedef struct temps
+{
+SDL_Surface *texte;
+ SDL_Rect position;
+  
+    TTF_Font *police ;
+
+ char entree[100];
+ int secondesEcoulees;
+SDL_Color couleurBlanche;
+time_t t1,t2;
+int min, sec;
+}temps;
+
+
+typedef struct Score 
+{ 
+   SDL_Surface *fondScore;
+   SDL_Surface *texteScore;
+   SDL_Rect posFond;
+   SDL_Rect posScore;
+   int scoreActuel;
+   TTF_Font *police;
+   
+}Score;
+
+
 
 void initmap( minimap *m);
 void afficherminimap (minimap m, SDL_Surface * screen);

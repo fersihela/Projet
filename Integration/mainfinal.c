@@ -13,8 +13,7 @@
 #include "collisionparfaite.h"
 
 
-#define SCREEN_W 1200
-#define SCREEN_H 800
+
 
 
 int main()
@@ -22,12 +21,7 @@ int main()
  TTF_Init();
 //declaration
 SDL_Surface *screen=NULL;
-SDL_Surface *texte1=NULL;  //texte:score
-SDL_Surface *number1=NULL; //score(valeur)
-SDL_Surface *texte2=NULL;
-TTF_Font *police=NULL; //font du score
-TTF_Font *text2=NULL;  //vie 1  
-SDL_Surface *screen=NULL; 
+
 
 //enigme texte
 	enigme enigme;
@@ -42,22 +36,21 @@ SDL_Surface *screen=NULL;
 back b;
 Ennemi e;
 Ennemi1 e1; 
-perso p,pM;
+perso p;
 minimap m;
 int l,f;
-int done=1,droite=0,gauche=0,up=0,dir=2,input;
-SDL_Event event;
+int done=1,droite=0,gauche=0,up=0,dir=2;
 Uint32 t_prev,dt;
 temps t;
 int continuer=1,input=0;
 background ba,bm;
-Personne perso;
+Personne perso,pM;
 SDL_Event event;
 
 //initialisation
 SDL_Init(SDL_INIT_VIDEO);
 TTF_Init();
-screen=SDL_SetVideoMode(SCREEN_W,SCREEN_H,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+screen=SDL_SetVideoMode(1200,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 if(screen==NULL)
     	{
         	printf("ERREUR: %s\n", SDL_GetError());
@@ -89,41 +82,7 @@ Mix_PlayMusic(music,-1);
 
 // affiche_back(back B, SDL_Surface* screen)	;
 e=initEnnemi(e);
-e1=initEnnemi1(e1);
-
-//initialiser score
- police = TTF_OpenFont("image/REP2CN__.ttf", 35); //chargement d'une police avec taille
-
-SDL_Color blanco={255,255,255}; 
-p.score_perso.position_txt.x=15;
-p.score_perso.position_txt.y=20;
-texte1= TTF_RenderText_Blended(police,"score :",blanco);  
-p.score_perso.number[20];
-p.score_perso.valscore=1450;
-
-sprintf(p.score_perso.number, "%d",(p.score_perso.valscore));//conversion entier en une chaine de caractère
-
-number1= TTF_RenderText_Blended(police,p.score_perso.number,blanco);
-p.score_perso.position_number.x=120;
-p.score_perso.position_number.y=20;
-TTF_CloseFont(police);
-
-//vie1
-text2=TTF_OpenFont("image/REP2CN__.ttf",35); //chargement police/taille
-SDL_Color blanc={255,255,255};
-p.vie_perso.position_texte.x=580;
-p.vie_perso.position_texte.y=15;
-texte2= TTF_RenderText_Blended(text2,"Vie1 :",blanc); //ecriture
-TTF_CloseFont(text2);
-
-p.vie_perso.image_vie[0]=IMG_Load("image/vie03.png") ; //chargement d'image vie p1
-p.vie_perso.image_vie[1]=IMG_Load("image/vie02.png") ;
-p.vie_perso.image_vie[2]=IMG_Load("image/vie01.png") ;
-p.vie_perso.image_vie[3]=IMG_Load("image/vie00.png") ;
- p.vie_perso.position_vie.x=650;   //initialisation de position
- p.vie_perso.position_vie.y=20;
- p.vie_perso.nbvie=3;
- 
+e1=initEnnemi1(e1); 
 initialisation(&enigme,&volume_enig,&mute_enig,&time_enig,anim_enig);//initialisation enigme texte
  
 while (done)
@@ -148,12 +107,6 @@ SDL_BlitSurface(pM.sprite, NULL, screen, &pM.position_perso);//afficher perso da
         e1 = deplacer1 (e1, f);  //deplacer le perroquet
 
 
-SDL_BlitSurface(p.vie_perso.image_vie[p.vie_perso.nbvie],NULL,screen,(&p.vie_perso.position_vie));  //affichage vie p1
-
-SDL_BlitSurface(texte2,NULL,screen,&(p.vie_perso.position_texte));//vie (texte)p1
-
-SDL_BlitSurface(texte1, NULL, screen,&p.score_perso.position_txt);//score(texte)
-SDL_BlitSurface(number1, NULL, screen,&p.score_perso.position_number);//score(valeur) 
  SDL_Flip(screen);//mise à jour
 SDL_Delay(100); //attente
 t_prev = SDL_GetTicks();
