@@ -24,7 +24,7 @@ typedef struct
 
 
 
-typedef struct temps
+typedef struct 
 {
 SDL_Surface *texte;
  SDL_Rect position;
@@ -39,7 +39,7 @@ int min, sec;
 }temps;
 
 
-typedef struct Score 
+typedef struct  
 { 
    SDL_Surface *fondScore;
    SDL_Surface *texteScore;
@@ -61,8 +61,8 @@ void free_minimap (minimap *m);
 void affichertemps (int * temps,SDL_Surface *screen);
 
 void initialiser_temps(temps *t);
-void afficher_temps(temps *t,SDL_Surface *ecran);
-void free_temps(temps *t,SDL_Surface *ecran);
+void afficher_temps(temps *t,SDL_Surface *screen);
+void free_temps(temps *t,SDL_Surface *screen);
 void update_1_(SDL_Rect *prochain , SDL_Rect *principal, SDL_Rect *Pminimap, int distance, int longueur,int longueurM);
 void update_2_(SDL_Rect *prochain , SDL_Rect *principal, SDL_Rect *Pminimap, int distance, int longueur,int longueurM);
 void mouvement(Personne *p ,Personne *pM ,Personne *pMprochaine, int distance, int longueur,int longueurM , SDL_Surface *masked , int sens);

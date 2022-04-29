@@ -11,11 +11,6 @@
 #include "minimap.h"
 #include "background.h"
 #include "collisionparfaite.h"
-
-
-
-
-
 int main()
 {
  TTF_Init();
@@ -27,12 +22,10 @@ SDL_Surface *screen=NULL;
 	enigme enigme;
 	volume volume_enig;
 	mute mute_enig;
-	temps_e time_enig;
+	temps_e time_enig; //temps enigme
 	SDL_Surface* anim_enig[4];
 	int *ianimation=0;
 //__________________________
-
-
 back b;
 Ennemi e;
 Ennemi1 e1; 
@@ -60,7 +53,7 @@ if(screen==NULL)
 initPerso(&p);
 initialiser_back(&b);
 initmap( &m);
-initialiser_temps(&t);
+initialiser_temps(&t);//init temps minimap
 initialisation_back(&ba);
 initBackMasque(&bm);
 
@@ -96,7 +89,7 @@ affiche_back(b,screen)	;
 afficherPerso(p,screen);
 afficherEnnemi(e,screen);//affichage de l'ennemi pirate
 afficherEnnemi1(e1,screen);//affichage de l'ennemi perroquet
-afficher_temps(&t,screen);
+afficher_temps(&t,screen);//affichage temps minimap
 afficherminimap ( m,screen);
 SDL_BlitSurface(pM.sprite, NULL, screen, &pM.position_perso);//afficher perso dans minimap
  e = animerEnnemi (e, l);//animation de l'ennemi pirate
