@@ -33,7 +33,7 @@ t->textColor.b=255;
 t->font=TTF_OpenFont("RES/Chalkboy.ttf",65);
 }
 //--------------------------TEMPS----------------------------------
-void initialiser_temps_enigme(temps *t)
+void initialiser_temps_enigme(temps_e *t)
 {
  //t->texte = NULL;
  t->position.x=700;
@@ -88,7 +88,7 @@ void initialiser_mute(mute *O)
 (*O).pos_soundon.h=60;
 }
 //----------------------INIT----------------------------
-void initialisation(enigme *e,volume *O,mute *m,temps *t,SDL_Surface *anim[])
+void initialisation(enigme *e,volume *O,mute *m,temps_e *t,SDL_Surface *anim[])
 {
 initialiser_back_enigme_fichier(e);
 initText(e);
@@ -98,7 +98,7 @@ initialiser_volume(O);
 initialiser_mute(m);
 initialiser_temps_enigme(t);
 initanimation(anim);
-e->resolu=0;
+//e->resolu=0;
 }
 //----------------------ENIGME----------------------------
 void init_enig_fichier( enigme * en )
@@ -167,7 +167,7 @@ void afficheanimation(SDL_Surface* screen,enigme *B,SDL_Surface *anim[4])
 
 }
 //-----------------------------AFFICHER TEMPS----------------------
-void afficher_temps_enigme(temps *t,SDL_Surface *screen,enigme *en)
+void afficher_temps_enigme(temps_e *t,SDL_Surface *screen,enigme *en)
 {	
     	time(&(t->t2));// temps actuel
 	t->secondesEcoulees = t->t2 - t->t1;
@@ -234,7 +234,7 @@ void alea_enig_fichier(enigme *en)
 	en->Rep4 = TTF_RenderText_Blended(en->font,rep4,en->textColor);
 }
 //-------------------------------RESOLUTION---------------------------
-void resolution(enigme *en, SDL_Surface* screen,volume O,mute m,temps t,SDL_Surface *anim[])
+void resolution(enigme *en, SDL_Surface* screen,volume O,mute m,temps_e t,SDL_Surface *anim[])
 {
 SDL_Event event;
 int continuer=1;
@@ -351,7 +351,7 @@ if ( en->solution == choix )
         {
             SDL_BlitSurface(en->correct,NULL, screen, &en->position_correct );
             SDL_Flip(screen);
-		en->resolu=1;continuer=0;
+		//en->resolu=1;continuer=0;
             SDL_Delay(3000);
 
         }
@@ -360,7 +360,7 @@ if ( en->solution == choix )
             SDL_BlitSurface(en->wrong,NULL, screen, &en->position_wrong );
 
             SDL_Flip(screen);
-		en->resolu=2;continuer=0;
+		//en->resolu=2;continuer=0;
             SDL_Delay(3000);
 
         }

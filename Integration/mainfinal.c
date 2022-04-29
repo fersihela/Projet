@@ -27,7 +27,7 @@ SDL_Surface *screen=NULL;
 	enigme enigme;
 	volume volume_enig;
 	mute mute_enig;
-	temps time_enig;
+	temps_e time_enig;
 	SDL_Surface* anim_enig[4];
 	int *ianimation=0;
 //__________________________

@@ -36,7 +36,7 @@ int secondesEcoulees;
 SDL_Color couleurBlanche;
 time_t t1,t2;
 int min, sec;
-}temps;
+}temps_e;
 //Volume
 typedef struct{
 
@@ -53,9 +53,9 @@ SDL_Surface *img_soundsupp;
 SDL_Rect pos_soundon;
 }mute;
 //------------------------------------------------------
-void initialisation(enigme *e,volume *O,mute *m,temps *t,SDL_Surface *anim[]);
-void afficher_temps_enigme(temps *t,SDL_Surface *screen,enigme *en);
-void initialiser_temps_enigme(temps *t);
+void initialisation(enigme *e,volume *O,mute *m,temps_e *t,SDL_Surface *anim[]);
+void afficher_temps_enigme(temps_e *t,SDL_Surface *screen,enigme *en);
+void initialiser_temps_enigme(temps_e *t);
 void alea_enig_fichier(enigme *en );
 void blit_enig_fichier ( enigme *en, SDL_Surface* screen,mute m,volume O);
 void init_enig_fichier( enigme * en);
@@ -63,7 +63,7 @@ void initialiser_volume(volume *O);
 void initialiser_mute(mute *O);
 void initanimation(SDL_Surface *anim[]);
 void freee( enigme *en);
-void resolution(enigme *en, SDL_Surface* screen,volume O,mute m,temps t,SDL_Surface* anim[]);
+void resolution(enigme *en, SDL_Surface* screen,volume O,mute m,temps_e t,SDL_Surface* anim[]);
 void afficheanimation(SDL_Surface* screen,enigme *B,SDL_Surface *anim[]);
 void libereranimation(SDL_Surface *anim[]);
 #endif
