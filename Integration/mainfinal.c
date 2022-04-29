@@ -44,7 +44,7 @@ Uint32 t_prev,dt;
 temps t;
 int continuer=1,input=0;
 background ba,bm;
-Personne perso,pM;
+Personne pM; 
 SDL_Event event;
 
 //initialisation
@@ -232,7 +232,7 @@ if (p.position.y >=270)
 
 if(input == 1)
 {
-				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+				if( (collisionparfaite(screen,p)==0) && (p.position.x==(ba.camera2.x/2)))
 
 				 {deplacerPerso(&p,dt);
                                  animerPerso(&p);}
@@ -248,7 +248,7 @@ input =0;
 
 if(input == 2)
 {
-				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+				if( (collisionparfaite(screen,p)==0) && (p.position.x==(ba.camera2.x/2)))
 
 				 {deplacerPerso(&p,dt);
                                  animerPerso(&p);}
@@ -263,7 +263,7 @@ input =0;
 
 if(input == 3)
 {
-				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+				if( (collisionparfaite(screen,p)==0) && (p.position.x==(ba.camera2.x/2)))
 
                                { deplacerPerso(&p,dt);
 	                         animerPerso(&p);}
@@ -276,7 +276,7 @@ input =0;
 
 if(input == 4)
 {
-				if( (collisionparfaite(screen,perso)==0) && (perso.pos_perso.x==(ba.camera2.x/2)))
+				if( (collisionparfaite(screen,p)==0) && (p.position.x==(ba.camera2.x/2)))
 
 				{ deplacerPerso(&p,dt);
                                   animerPerso(&p);}

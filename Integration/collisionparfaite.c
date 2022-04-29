@@ -14,7 +14,7 @@ SDL_Color getpixel(SDL_Surface *pSurface,int x,int y)
 	SDL_GetRGB(col,pSurface->format, &color.r, &color.g, &color.b);
 	return (color);
 }
-int  collisionparfaite(SDL_Surface *psurface,Personne p)
+int  collisionparfaite(SDL_Surface *psurface,perso p)
 {	
 	int tabx[7],taby[7],i;
 	SDL_Color color1,color;
@@ -22,29 +22,29 @@ int  collisionparfaite(SDL_Surface *psurface,Personne p)
 	color1.g = 0;
 	color1.b = 0;
 
-	tabx[0]=p.pos_perso.x;
-	taby[0]=p.pos_perso.y;
+	tabx[0]=p.position.x;
+	taby[0]=p.position.y;
 
-	tabx[1]=(p.pos_perso.x)+((p.pos_perso.w)/2);
- 	taby[1]=p.pos_perso.y;
+	tabx[1]=(p.position.x)+((p.position.w)/2);
+ 	taby[1]=p.position.y;
 
-	tabx[2]=(p.pos_perso.x+p.pos_perso.w);
-	taby[2]=p.pos_perso.y;
+	tabx[2]=(p.position.x+p.position.w);
+	taby[2]=p.position.y;
 
-	tabx[3]=p.pos_perso.x;
-	taby[3]=(p.pos_perso.y)+((p.pos_perso.h)/2);
+	tabx[3]=p.position.x;
+	taby[3]=(p.position.y)+((p.position.h)/2);
 
-	tabx[4]=p.pos_perso.x;
-	taby[4]=(p.pos_perso.y+p.pos_perso.h);
+	tabx[4]=p.position.x;
+	taby[4]=(p.position.y+p.position.h);
 
-	tabx[5]=(p.pos_perso.x)+((p.pos_perso.w)/2);
-	taby[5]=(p.pos_perso.y+p.pos_perso.h);
+	tabx[5]=(p.position.x)+((p.position.w)/2);
+	taby[5]=(p.position.y+p.position.h);
 
-	tabx[6]=(p.pos_perso.x+p.pos_perso.w);
-	taby[6]=(p.pos_perso.y+p.pos_perso.h);
+	tabx[6]=(p.position.x+p.position.w);
+	taby[6]=(p.position.y+p.position.h);
 
-	tabx[7]=(p.pos_perso.x+p.pos_perso.w);
-	taby[7]=(p.pos_perso.y)+((p.pos_perso.h)/2);
+	tabx[7]=(p.position.x+p.position.w);
+	taby[7]=(p.position.y)+((p.position.h)/2);
 	
 	
 	
@@ -61,27 +61,27 @@ int  collisionparfaite(SDL_Surface *psurface,Personne p)
 	
 }	
 
-void collision(SDL_Surface *psurface,Personne *p)
+void collision(SDL_Surface *psurface,perso *p)
 {	int i;
 	i=collisionparfaite(psurface,*p);
 
 	switch (i)
 	{
-		case 0 :p->pos_perso.y+=1;
+		case 0 :p->position.y+=1;
 			break;
-		case 1 :p->pos_perso.y+=1;
+		case 1 :p->position.y+=1;
 			 break;
-		case 2 :p->pos_perso.y+=1;
+		case 2 :p->position.y+=1;
 			break;
-		case 3 :p->pos_perso.x+=1;
+		case 3 :p->position.x+=1;
 			break;
-		case 4 :p->pos_perso.y-=1;
+		case 4 :p->position.y-=1;
 			break;
-		case 5 :p->pos_perso.y-=1; 
+		case 5 :p->position.y-=1; 
 			break;
-		case 6 :p->pos_perso.y-=1; 
+		case 6 :p->position.y-=1; 
 			break;
-		case 7 :p->pos_perso.x-=1;
+		case 7 :p->position.x-=1;
 			break;
 		
 
