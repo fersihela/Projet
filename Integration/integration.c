@@ -22,9 +22,7 @@ void initPerso(perso *p)
 { p->spritesheet=IMG_Load("RES/perso2.png");
     
     p->position.x=50;    //position p1 (back du jeu)
-    p->position.y=270;
-p->position.h=250;    //position p1 (back du jeu)
-    p->position.w=100;
+    p->position.y=238;
 
     p->direction=2;//direction droite  (p est stable)
 
@@ -38,7 +36,7 @@ p->position.h=250;    //position p1 (back du jeu)
     p->pos_sprite.h= 100;
     p->pos_sprite.w= 100;
 // initialiser score
-p->score_perso.police = TTF_OpenFont("image/REP2CN__.ttf", 35); //chargement d'une police avec taille
+p->score_perso.police = TTF_OpenFont("RES/REP2CN__.ttf", 35); //chargement d'une police avec taille
 SDL_Color blanco={255,255,255}; 
 p->score_perso.position_txt.x=15;
 p->score_perso.position_txt.y=20;
@@ -53,22 +51,56 @@ TTF_CloseFont(p->score_perso.police);
 
 
 //initialiser vie 1
-p->vie_perso.text=TTF_OpenFont("image/REP2CN__.ttf",35); //chargement police/taille
+p->vie_perso.text=TTF_OpenFont("RES/REP2CN__.ttf",35); //chargement police/taille
 SDL_Color blanc={255,255,255};
 p->vie_perso.position_texte.x=600;
 p->vie_perso.position_texte.y=20;
 p->vie_perso.texte= TTF_RenderText_Blended(p->vie_perso.text,"Vie1 :",blanc); //ecriture
 TTF_CloseFont(p->vie_perso.text);
-p->vie_perso.image_vie[0]=IMG_Load("image/vie03.png") ; //chargement d'image vie p1
-p->vie_perso.image_vie[1]=IMG_Load("image/vie02.png") ;
-p->vie_perso.image_vie[2]=IMG_Load("image/vie01.png") ;
-p->vie_perso.image_vie[3]=IMG_Load("image/vie00.png") ;
+p->vie_perso.image_vie[0]=IMG_Load("RES/vie03.png") ; //chargement d'image vie p1
+p->vie_perso.image_vie[1]=IMG_Load("RES/vie02.png") ;
+p->vie_perso.image_vie[2]=IMG_Load("RES/vie01.png") ;
+p->vie_perso.image_vie[3]=IMG_Load("RES/vie00.png") ;
 
  p->vie_perso.position_vie.x=680;   //initialisation de position
  p->vie_perso.position_vie.y=20;
  p->vie_perso.nbvie=3;
 }
+void initPerso2(perso *p2)
+{
+p2->spritesheet=IMG_Load("RES/perso.png"); //chargement d'image p2
+    
+    p2->position.x=50;
+    p2->position.y=238;
 
+    p2->direction=2;
+
+    p2->acceleration=0;
+    p2->vitesse=0;
+    p2->vitesseV=0;
+
+    //position d'un frame  pour p2
+    p2->pos_sprite.x= 0;
+    p2->pos_sprite.y= 200;
+    p2->pos_sprite.h= 100;
+    p2->pos_sprite.w= 100;
+
+//initialiser vie 2
+p2->vie_perso.text=TTF_OpenFont("RES/REP2CN__.ttf",35);  //chargement police/taille
+SDL_Color couleur={255,255,255};
+p2->vie_perso.position_texte.x=600;
+p2->vie_perso.position_texte.y=50;
+p2->vie_perso.texte= TTF_RenderText_Blended(p2->vie_perso.text,"Vie2 :",couleur); //ecriture
+TTF_CloseFont(p2->vie_perso.text);
+p2->vie_perso.image_vie[0]=IMG_Load("RES/vie03.png") ; //chargement d'image vie p2
+p2->vie_perso.image_vie[1]=IMG_Load("RES/vie02.png") ;
+p2->vie_perso.image_vie[2]=IMG_Load("RES/vie01.png") ;
+p2->vie_perso.image_vie[3]=IMG_Load("RES/vie00.png") ;
+
+ p2->vie_perso.position_vie.x=680;
+ p2->vie_perso.position_vie.y=50;
+ p2->vie_perso.nbvie=3;
+}
 Ennemi initEnnemi( Ennemi e)
  {
   e.image[0]=IMG_Load("RES/rpg1.png");//loading des images dirigées vers la droite
@@ -291,14 +323,13 @@ p->pos_sprite.y = p->direction * 100 ; //  ligne du sprite sheet
 
 
 void saut (perso* p) {
-   // if (p->position.y==270)   // perso atteint position initiale
-  //  {
-   //     p->vitesseV=-50;    // vitessev diminue progressivement
+    if (p->position.y==238)   // perso atteint position initiale
+   {
+       p->vitesseV=-50;    // vitessev diminue progressivement
  
 
-   // }
-p->position.y-=50;
-    
+    }
+
 }
 
 void liberer(perso p, SDL_Surface * screen)

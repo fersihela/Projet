@@ -71,6 +71,7 @@ Mix_Music* son_contenu;
 void initialiser_back(back *B);
 void affiche_back(back B, SDL_Surface* screen)	;
 void initPerso(perso *p);
+void initPerso2(perso *p2);
 Ennemi initEnnemi( Ennemi e);	
 Ennemi1 initEnnemi1( Ennemi1 e1);
 void  afficherEnnemi ( Ennemi e, SDL_Surface* screen);

@@ -29,10 +29,10 @@ SDL_Surface *screen=NULL;
 back b;
 Ennemi e;
 Ennemi1 e1; 
-perso p;
+perso p,p2;
 minimap m;
 int l,f;
-int done=1,droite=0,gauche=0,up=0,dir=2;
+int done=1,droite=0,gauche=0,up=0,dir=2,dir2=2,gauche2=0,droite2=0,up2=0;
 Uint32 t_prev,dt;
 temps t;
 int continuer=1,input=0;
@@ -51,10 +51,11 @@ if(screen==NULL)
        }
 
 initPerso(&p);
+initPerso2(&p2);
 initialiser_back(&b);
 initmap( &m);
 initialiser_temps(&t);//init temps minimap
-initialisation_back(&ba);
+//initialisation_back(&ba);
 initBackMasque(&bm);
 
 
@@ -87,6 +88,7 @@ while (done)
 //affichage
 affiche_back(b,screen)	;
 afficherPerso(p,screen);
+afficherPerso(p2,screen);
 afficherEnnemi(e,screen);//affichage de l'ennemi pirate
 afficherEnnemi1(e1,screen);//affichage de l'ennemi perroquet
 afficher_temps(&t,screen);//affichage temps minimap
@@ -130,8 +132,15 @@ case SDL_KEYDOWN:
        input = 3;
         break;  
 case SDLK_DOWN:
-        
        input =4;
+ case SDLK_a:
+    droite2=1;
+      break;
+    case SDLK_q:
+      gauche2=1;
+      break;
+     case SDLK_z:
+         up2=1;
         break;    
  
     }
@@ -157,7 +166,20 @@ switch (event.key.keysym.sym)
     case SDLK_UP:
         up=0;
       
-        break;   
+        break; 
+
+case SDLK_a:
+      droite2=0;   //p1 stable avec direction droite
+     dir2=2; //pour sauvgarder direction du perso lorsque il devient stable
+     p2.vitesse=0;
+                break;
+            case SDLK_q:
+                gauche2=0;    //p1 stable avec  direction gauche
+                p2.vitesse=0;
+                dir2=3;
+                break;
+            case SDLK_z:
+                up2=0;  
    
     }
 
@@ -182,6 +204,18 @@ if (gauche==1)
     p.direction=1;
 }
 
+if (droite2==1)
+{
+    p2.vitesse=10;
+    p2.acceleration+=0.5;
+    p2.direction=0;
+}
+if (gauche2==1)
+{
+    p2.vitesse=10;
+    p2.acceleration+=0.5;
+    p2.direction=1;
+}
 if ((Collision_Bounding_Box(p,e)==0)&&(Collision_Bounding_Box1( p,e1)==0))
  {    deplacerPerso(&p,dt);
      animerPerso(&p);
@@ -208,8 +242,20 @@ p.acceleration=0; //   controler l'intervalle de l'acceleration p1
 if (p.acceleration>4) 
 p.acceleration=4;
 
+if (up2==1) 
+saut(&p2);
+
+p2.acceleration -=0.3;//deceleration p1
+
+if (p2.acceleration<0 ) 
+p2.acceleration=0; //   controler l'intervalle de l'acceleration p1
+if (p2.acceleration>4) 
+p2.acceleration=4;
 SDL_Delay(1);
 dt = SDL_GetTicks() - t_prev;   //le temps ecoulé depuis initialisation du boucle du jeu
+   
+deplacerPerso(&p2,dt);
+animerPerso(&p2);
 
 if ((p.vitesse==0)&&(p.acceleration==0))   
 {
@@ -217,13 +263,23 @@ if ((p.vitesse==0)&&(p.acceleration==0))
 }
 p.position.y += p.vitesseV;  
 p.vitesseV += 10; 
-if (p.position.y >=270)
+if (p.position.y >=238)
 {
     p.vitesseV=0;
-    p.position.y=270; 
+    p.position.y=238; 
 }
-
-if(input == 1)
+if ((p2.vitesse==0)&&(p2.acceleration==0))  //perso est stable 
+{
+    p2.direction=dir2;  //sauvgarder la direction du personnage p1 lorsque il devient fixe 
+}
+p2.position.y += p2.vitesseV;  //position change en fonction du vitesev
+p2.vitesseV += 10; 
+if (p2.position.y >=238)
+{
+    p2.vitesseV=0;
+    p2.position.y=238; //perso revient au position initiale
+}
+   if(input == 1)
 {
 				if( (collisionparfaite(screen,p)==0) && (p.position.x==(ba.camera2.x/2)))
 
@@ -233,7 +289,7 @@ if(input == 1)
 				{
 				scrolling(&ba,1);
 				scrolling(&bm,1);
-				//collision(screen,&perso);
+				
 				}	
 input =0;
 
@@ -249,7 +305,7 @@ if(input == 2)
 				{
 				scrolling(&ba,2);	
 				scrolling(&bm,2);
-				//collision(screen,&perso);
+				
 				}
 input =0;
 }
@@ -263,7 +319,7 @@ if(input == 3)
 				else			
 				{scrolling(&ba,3);		
 				scrolling(&bm,3);}
-				//collision(screen,&perso);
+				
 input =0;
 }
 
@@ -276,15 +332,17 @@ if(input == 4)
 				else 
 				{scrolling(&ba,4);		
 				scrolling(&bm,4);}
-				//collision(screen,&perso);
+				
 input =0;
 			
 			
-}
+} 
 }
 
-SDL_FreeSurface(p.spritesheet);
+
 //liberation enigme texte
+liberer(p,screen);
+liberer(p2,screen);
 freee(&enigme);
 libereranimation(anim_enig);
 //_________________________
