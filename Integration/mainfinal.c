@@ -223,21 +223,21 @@ if (gauche2==1)
     p2.acceleration+=0.5;
     p2.direction=1;
 }
-if ((Collision_Bounding_Box(p,e)==0)&&(Collision_Bounding_Box1( p,e1)==0))
+if ((Collision_Bounding_Box(p,e)==0)&&(Collision_Bounding_Box1(p,e1)==0))
  {    deplacerPerso(&p,dt);
      animerPerso(&p);
 }
-if ((Collision_Bounding_Box(p,e)==1)&&(Collision_Bounding_Box1( p,e1)==1))//il y a collision 
+if ((Collision_Bounding_Box(p,e)==1)&&(Collision_Bounding_Box1(p,e1)==1))//il y a collision 
 {
 if (p.vie_perso.nbvie>0)
 {p.vie_perso.nbvie--;
 p.score_perso.valscore--;
 }
 }
-else if ((p.vie_perso.nbvie==0)||(p.score_perso.valscore<0))
+/*else if ((p.vie_perso.nbvie==0)||(p.score_perso.valscore<0))
 {
 done=0;
-}
+}  */
 
 if (up==1) 
 saut(&p);
@@ -354,9 +354,9 @@ freee(&enigme);
 libereranimation(anim_enig);
 //_________________________
 TTF_Quit();
-free_minimap (&m);
+//free_minimap (&m);
 free_temps(&t,screen);
-SDL_FreeSurface(pM.sprite);
+//SDL_FreeSurface(pM.sprite);
 Mix_FreeMusic(music);
 atexit(SDL_Quit);
 SDL_Quit();
