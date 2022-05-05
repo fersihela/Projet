@@ -20,17 +20,19 @@ b->camera.h=SCREEN_H;
 void initBack2 (background *b)
 {
 //background2
-b->imgback=IMG_Load("RES/map.png");
+b->imgback=IMG_Load("RES/back.png");
 b->posback2.x=0;
 b->posback2.y=0;
+b->posback2.w=SCREEN_W;
+b->posback2.h=SCREEN_H;
 //camera2
 b->camera2.x=0;
 b->camera2.y=0;
 b->camera2.w=SCREEN_W; 
 b->camera2.h=SCREEN_H;
 //musique
-b->son=Mix_LoadMUS("musique.mp3"); //Chargement de la musique
-	b->image_moon=IMG_Load("moon.png");  
+/*b->son=Mix_LoadMUS("RES/musique.mp3"); //Chargement de la musique
+	b->image_moon=IMG_Load("RES/moon.png");  
 	b->pos_image_moon.x=500;
 	b->pos_image_moon.y=100;
 	
@@ -39,7 +41,7 @@ b->son=Mix_LoadMUS("musique.mp3"); //Chargement de la musique
 	b->single_moon.x=0;
 	b->single_moon.y=0;
 
-	b->moon_num=0;
+	b->moon_num=0; */
 }
 
 
@@ -54,14 +56,14 @@ void initialisation_back(background *b)
 void afficheBack (background b, SDL_Surface *ecran)
 {
 
-Mix_PlayMusic(b.son, -1);
+//Mix_PlayMusic(b.son, -1);
 SDL_BlitSurface(b.imgback,&b.camera,ecran,&b.posback);
 }
 
 void afficheBack2 (background b, SDL_Surface *ecran)
 {
 
-Mix_PlayMusic(b.son, -1); 
+//Mix_PlayMusic(b.son, -1); 
 SDL_BlitSurface(b.imgback,&b.camera2,ecran,&b.posback2);
 }
 

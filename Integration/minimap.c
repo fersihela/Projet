@@ -26,10 +26,10 @@ void free_minimap (minimap *m)
 void initialiser_temps(temps *t)
 {
  t->texte = NULL;
- t->position.x=1400;
+ t->position.x=400;
    t->position.y=30;
      t->police = NULL;
-  t->police = TTF_OpenFont("avocado.ttf", 40);
+  t->police = TTF_OpenFont("RES/avocado.ttf", 40);
     strcpy( t->entree,"");
 (t->secondesEcoulees)=0;
 time(&(t->t1));	 //temps du debut
@@ -38,7 +38,7 @@ time(&(t->t1));	 //temps du debut
 
 void afficher_temps(temps *t,SDL_Surface *screen)
 {	
-SDL_Color couleurnoir= {0, 0,0};
+SDL_Color couleurnoir= {0,0,0};
 
     	time(&(t->t2));// temps actuel
 

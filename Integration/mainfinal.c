@@ -15,7 +15,7 @@ int main()
 {
  TTF_Init();
 //declaration
-SDL_Surface *screen=NULL;
+SDL_Surface *screen;
 
 
 //enigme texte
@@ -26,7 +26,7 @@ SDL_Surface *screen=NULL;
 	SDL_Surface* anim_enig[4];
 	int *ianimation=0;
 //__________________________
-back b;
+//back b;
 Ennemi e;
 Ennemi1 e1; 
 perso p,p2;
@@ -36,7 +36,7 @@ int done=1,droite=0,gauche=0,up=0,dir=2,dir2=2,gauche2=0,droite2=0,up2=0;
 Uint32 t_prev,dt;
 temps t;
 int continuer=1,input=0;
-background ba,bm;
+background ba,bm,b;
 Personne pM; 
 SDL_Event event;
 
@@ -51,11 +51,12 @@ if(screen==NULL)
        }
 
 initPerso(&p);
+//initialiser_back(&b);
 initPerso2(&p2);
-initialiser_back(&b);
-initmap( &m);
-initialiser_temps(&t);//init temps minimap
 //initialisation_back(&ba);
+initBack2(&b);
+initmap(&m);
+initialiser_temps(&t);//init temps minimap
 initBackMasque(&bm);
 
 
@@ -86,14 +87,20 @@ while (done)
 	resolution(&enigme,screen,volume_enig,mute_enig,time_enig,anim_enig );//enigme texte
 	}*/
 //affichage
-affiche_back(b,screen)	;
+
+afficheBack2(b,screen);
 afficherPerso(p,screen);
 afficherPerso(p2,screen);
 afficherEnnemi(e,screen);//affichage de l'ennemi pirate
 afficherEnnemi1(e1,screen);//affichage de l'ennemi perroquet
-afficher_temps(&t,screen);//affichage temps minimap
-afficherminimap ( m,screen);
-SDL_BlitSurface(pM.sprite, NULL, screen, &pM.position_perso);//afficher perso dans minimap
+
+afficher_temps(&t,screen);//affichage temps minimap 
+/* afficherminimap ( m,screen); 
+SDL_BlitSurface(pM.sprite, NULL, screen, &pM.position_perso);//afficher perso dans minimap*/
+SDL_Flip(screen);//mise à jou
+
+
+
  e = animerEnnemi (e, l);//animation de l'ennemi pirate
         e1 = animerEnnemi1 (e1, f);//animation de l'ennemi perroquet
         l = Collision_Bounding_Box (p, e);//retourner la valeur 1 en cas de collision du pirate avec perso
@@ -102,7 +109,7 @@ SDL_BlitSurface(pM.sprite, NULL, screen, &pM.position_perso);//afficher perso da
         e1 = deplacer1 (e1, f);  //deplacer le perroquet
 
 
- SDL_Flip(screen);//mise à jour
+ 
 SDL_Delay(100); //attente
 t_prev = SDL_GetTicks();
      
