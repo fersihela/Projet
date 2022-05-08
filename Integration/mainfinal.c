@@ -51,9 +51,7 @@ if(screen==NULL)
        }
 
 initPerso(&p);
-//initialiser_back(&b);
 initPerso2(&p2);
-//initialisation_back(&ba);
 initBack2(&b);
 initmap(&m);
 initialiser_temps(&t);//init temps minimap
@@ -294,7 +292,7 @@ if (p2.position.y >=238)
                                  animerPerso(&p);}
 				else 		
 				{
-				scrolling(&ba,1);
+				scrolling(&b,1);
 				scrolling(&bm,1);
 				
 				}	
@@ -310,7 +308,7 @@ if(input == 2)
                                  animerPerso(&p);}
 				else 
 				{
-				scrolling(&ba,2);	
+				scrolling(&b,2);	
 				scrolling(&bm,2);
 				
 				}
@@ -324,7 +322,7 @@ if(input == 3)
                                { deplacerPerso(&p,dt);
 	                         animerPerso(&p);}
 				else			
-				{scrolling(&ba,3);		
+				{scrolling(&b,3);		
 				scrolling(&bm,3);}
 				
 input =0;
@@ -337,7 +335,7 @@ if(input == 4)
 				{ deplacerPerso(&p,dt);
                                   animerPerso(&p);}
 				else 
-				{scrolling(&ba,4);		
+				{scrolling(&b,4);		
 				scrolling(&bm,4);}
 				
 input =0;

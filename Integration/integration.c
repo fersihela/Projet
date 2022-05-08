@@ -120,9 +120,10 @@ Ennemi initEnnemi( Ennemi e)
   e.position.h= 250;
   e.position.w= 100;
  
+  //e.state=0;
   e.speed=1;//il ya de mvt
   e.frame=0;//statut avec laquelle on choisie limage
-  e.direction=0; //0 : droite , 1 : gauche
+  e.direction=1; //0 : droite , 1 : gauche
                  
   return e;
 }
