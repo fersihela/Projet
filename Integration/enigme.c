@@ -1,7 +1,3 @@
-/**
-
-* @file enigme.c
-*/
 #include "enigme.h"
 
 #include <stdio.h>
@@ -13,23 +9,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_image.h>
-/**  
-* @file enigme.c  
-* @brief Testing Program.  
-* @author C Team  
-* @version 0.1  
-* @date Apr 19, 2022  
-*  
-* Testing program for enigme  *  
-*/
-
 //-----------------------------------------INIT------------------------------------
 //INIT Background
-/**
-* @brief To initialize the background .
-* @param B the background
-* @return Nothing
-*/
 void initialiser_back_enigme_fichier(enigme *B)
 {
 
@@ -44,11 +25,6 @@ void initialiser_back_enigme_fichier(enigme *B)
 (*B).pos_back.h=0;
 }
 //------------------------TEXT------------------------------
-/**
-* @brief To initialize the text .
-* @param t the text
-* @return Nothing
-*/
 void initText(enigme *t)
 {
 t->textColor.r=255;
@@ -57,12 +33,7 @@ t->textColor.b=255;
 t->font=TTF_OpenFont("RES/Chalkboy.ttf",65);
 }
 //--------------------------TEMPS----------------------------------
-/**
-* @brief To initialize the time .
-* @param t the time
-* @return Nothing
-*/
-void initialiser_temps_enigme(temps *t)
+void initialiser_temps_enigme(temps_e *t)
 {
  //t->texte = NULL;
  t->position.x=700;
@@ -73,10 +44,6 @@ void initialiser_temps_enigme(temps *t)
 time(&(t->t1));	 //temps du debut
 }
 //------------------------MUSIC------------------------------
-/**
-* @brief To initialize the music .
-* @return Nothing
-*/
 void initmusic()
 {
 	Mix_Music *music;
@@ -91,11 +58,6 @@ music = Mix_LoadMUS("RES/menu son.mp3"); //load the music
 Mix_PlayMusic(music,-1); //play music 
 }
 //-----------------------VOLUME-----------------------------
-/**
-* @brief To initialize the volume .
-* @param O the volume
-* @return Nothing
-*/
  void initialiser_volume(volume *O)  		
 {
 (*O).img_soundminus= IMG_Load("RES/soundminus.png");
@@ -113,11 +75,6 @@ Mix_PlayMusic(music,-1); //play music
 (*O).pos_soundplus.h=60;
 }
 //----------------------MUTE-----------------------------
-/**
-* @brief To initialize the mute .
-* @param O the mute
-* @return Nothing
-*/
 
 void initialiser_mute(mute *O)  		
 {
@@ -131,15 +88,7 @@ void initialiser_mute(mute *O)
 (*O).pos_soundon.h=60;
 }
 //----------------------INIT----------------------------
-/**
-* @brief To initialize everything.
-* @param e for enigme
-* @param O for volume
-* @param m for mute
-* @param anim for animation
-* @return Nothing
-*/
-void initialisation(enigme *e,volume *O,mute *m,temps *t,SDL_Surface *anim[])
+void initialisation(enigme *e,volume *O,mute *m,temps_e *t,SDL_Surface *anim[])
 {
 initialiser_back_enigme_fichier(e);
 initText(e);
@@ -149,15 +98,9 @@ initialiser_volume(O);
 initialiser_mute(m);
 initialiser_temps_enigme(t);
 initanimation(anim);
-e->resolu=0;
-system("stty -F /dev/ttyUSB0 9600 -parenb cs8 -cstopb");
+//e->resolu=0;
 }
 //----------------------ENIGME----------------------------
-/**
-* @brief To initialize enigme.
-* @param en the enigme
-* @return Nothing
-*/
 void init_enig_fichier( enigme * en )
 {
 
@@ -202,11 +145,6 @@ void init_enig_fichier( enigme * en )
     en->alea = 0;
 }
 //---------------------------ANIMATION---------------------TIME OUT-------
-/**
-* @brief To initialize the animation .
-* @param anim the animation
-* @return Nothing
-*/
 void initanimation(SDL_Surface *anim[])
 { int i;
   char filename[43];
@@ -217,13 +155,6 @@ anim[i] = IMG_Load(filename);
 }
 }
 //---------------------------AFFICHER ANIM-----------------------
-/**
-* @brief To show the animation anim .
-* @param screen the screen
-* @param B the enigme
-* @param anim the animation
-* @return Nothing
-*/
 void afficheanimation(SDL_Surface* screen,enigme *B,SDL_Surface *anim[4])
 {	      
 	int ianimation=0;
@@ -236,14 +167,7 @@ void afficheanimation(SDL_Surface* screen,enigme *B,SDL_Surface *anim[4])
 
 }
 //-----------------------------AFFICHER TEMPS----------------------
-/**
-* @brief To show the time .
-* @param screen the screen
-* @param en the enigme
-* @param t the time
-* @return Nothing
-*/
-void afficher_temps_enigme(temps *t,SDL_Surface *screen,enigme *en)
+void afficher_temps_enigme(temps_e *t,SDL_Surface *screen,enigme *en)
 {	
     	time(&(t->t2));// temps actuel
 	t->secondesEcoulees = t->t2 - t->t1;
@@ -254,14 +178,6 @@ void afficher_temps_enigme(temps *t,SDL_Surface *screen,enigme *en)
 	SDL_BlitSurface(t->texte, NULL, screen, &(t->position)); /* Blit du texte */	
 }
 //-----------------------------AFFICHER ENIGME----------------------
-/**
-* @brief To show the enigme .
-* @param screen the screen
-* @param en the enigme
-* @param m the mute
-* @param o the volume
-* @return Nothing
-*/
 void blit_enig_fichier ( enigme *en, SDL_Surface* screen,mute m,volume O)
 {	      
 	SDL_BlitSurface(en->img_back,NULL,screen,&en->pos_back);
@@ -275,11 +191,6 @@ void blit_enig_fichier ( enigme *en, SDL_Surface* screen,mute m,volume O)
 	SDL_BlitSurface(m.img_soundon,NULL,screen,&m.pos_soundon);
 }
 //------------------------------ALEA ENIGME------------------------
-/**
-* @brief To make the alea .
-* @param en the enigme
-* @return Nothing
-*/
 void alea_enig_fichier(enigme *en)
 {
 	FILE* fichier = NULL;
@@ -323,33 +234,22 @@ void alea_enig_fichier(enigme *en)
 	en->Rep4 = TTF_RenderText_Blended(en->font,rep4,en->textColor);
 }
 //-------------------------------RESOLUTION---------------------------
-/**
-* @brief To do the resolution.
-* @param en for enigme
-* @param O for volume
-* @param m for mute
-* @param screen the screen
-* @param t the time
-* @param anim for animation
-* @return Nothing
-*/
-void resolution(enigme *en, SDL_Surface* screen,volume O,mute m,temps t,SDL_Surface *anim[])
+void resolution(enigme *en, SDL_Surface* screen,volume O,mute m,temps_e t,SDL_Surface *anim[])
 {
 SDL_Event event;
 int continuer=1;
 alea_enig_fichier(en);
 int x,y,choix=0;
-int volume=20,Vol,ard=0;
+int volume=20,Vol;
 		while(continuer == 1)	
 			{
-			
 			blit_enig_fichier (en,screen,m,O);
 			afficher_temps_enigme(&t,screen,en);
 if ((t.min==0)&&(t.sec==0))
 {	    afficheanimation(screen,en,anim);
 		continuer=0;
 }
-			arduinoReadData(&ard);
+
 		    	SDL_PollEvent(&event);
 	switch(event.type)
 		{
@@ -444,14 +344,6 @@ if (volume>0)
 		SDL_BlitSurface(m.img_soundoff,NULL,screen,&m.pos_soundon);
 		}
 		
-
-/*rep2*/	if (ard==1)
-		{choix=1;}
-
-/*rep2*/	if (ard==2) 
-                {choix=2;}
-
-		
 	SDL_Flip(screen);
 if (choix!=0) 
 {
@@ -459,11 +351,8 @@ if ( en->solution == choix )
         {
             SDL_BlitSurface(en->correct,NULL, screen, &en->position_correct );
             SDL_Flip(screen);
-		en->resolu=1;
-		ard=1;
-		arduinoWriteData(ard);
+		//en->resolu=1;continuer=0;
             SDL_Delay(3000);
-		continuer=0;
 
         }
         else 
@@ -471,53 +360,13 @@ if ( en->solution == choix )
             SDL_BlitSurface(en->wrong,NULL, screen, &en->position_wrong );
 
             SDL_Flip(screen);
-		en->resolu=2;
-		ard=2;
-		arduinoWriteData(ard);
+		//en->resolu=2;continuer=0;
             SDL_Delay(3000);
-		continuer=0;
 
         }
 }
 }}
-
-int arduinoWriteData(int x)
-{
-    char chemin[]="/dev/ttyUSB0";
-    FILE*f;
-
-    f=fopen(chemin,"w");
-    if(f == NULL)
-        return(-1);
-
-    fprintf(f,"%d",x);
-    fclose(f);
-
-    return(0);
-}
-
-int arduinoReadData(int *x)
-{
-    char chemin[]="/dev/ttyUSB0";
-    FILE*f;
-    char c;
-    f=fopen(chemin,"r");
-
-    if(f == NULL)
-        return(-1);
-
-    fscanf(f,"%d",x);
-
-    fclose(f);
-
-    return(0);
-}
 //-----------------------------------------------------
-/**
-* @brief To free the enigme.
-* @param en the enigme
-* @return Nothing
-*/
 void freee( enigme *en)
 {
     SDL_FreeSurface(en->img_back);
@@ -531,11 +380,6 @@ void freee( enigme *en)
     TTF_CloseFont(en->font);
 }
 //-----------------------------------------------------
-/**
-* @brief To free the animation.
-* @param anim the animation
-* @return Nothing
-*/
 void libereranimation(SDL_Surface *anim[])
 { int i;
   char filename[43];
