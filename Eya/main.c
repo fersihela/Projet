@@ -8,7 +8,7 @@
 
 int main(void)
 {	
-	int continuer=1,input=0;
+	int continuer=1;
 	SDL_Surface *screen=NULL,*screen2;
 	background ba,bm;
 	Personne perso;
@@ -31,16 +31,11 @@ int main(void)
 	
 
 	while (continuer)
-	{	afficheBack(bm,screen);
-		afficheBack2(ba,screen);
-		afficher_perso(screen,perso);		
+	{		
 		deplacer_perso(&perso,event);
-		//displaymoon(ba,ecran);
-		//animerBackground(ba);
- 		//collision(screen,&perso);
-		
+		afficheBack(bm,screen);
+ 		collision(screen,&perso);
 		SDL_PollEvent(&event);
-		SDL_Flip(screen);
      	switch(event.type)
         {
             case SDL_QUIT:
@@ -50,87 +45,48 @@ int main(void)
                 switch(event.key.keysym.sym)
                 {
 			case SDLK_RIGHT:
-			 	input = 1;
-			 break;
+			 
+			if ( collisionparfaite(screen,perso)==10){
+				scrolling(&ba,1);	//scrollingymin;	
+				scrolling(&bm,1);
+			}
+					
+                        break;
                         case SDLK_LEFT:
-                   		input = 2;
-                   
+                    
+                       if ( collisionparfaite(screen,perso)==10){
+				scrolling(&ba,2);//scrolllingysar;
+				scrolling(&bm,2);
+			}			
+		 
                         break;
 			 case SDLK_UP:
-			 	input = 3;
-		  				 
+			 
+		  		if ( collisionparfaite(screen,perso)==10){
+					scrolling(&ba,3);	//scrollingymin;	
+					scrolling(&bm,3);
+				}			 
                         break;
  			 case SDLK_DOWN:
- 			 	input = 4;
- 		  				 
+ 			 
+ 		  		if ( collisionparfaite(screen,perso)==10){
+					scrolling(&ba,4);	//scrollingymin;	
+					scrolling(&bm,4);
+				}			 
                         break;	
       		 }
       		 	
             break;
        
 
- 	} 
+ 	} 			
+			afficheBack2(ba,screen);
+			afficher_perso(screen,perso);	
+			SDL_Flip(screen);
+			SDL_Delay(100);
+	}
 
-if(input == 1)
-{
-				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
-
-				deplacer_perso(&perso,event);
-				else 		
-				{
-				scrolling(&ba,1);
-				scrolling(&bm,1);
-				//collision(screen,&perso);
-				}	
-input =0;
-
-}
-
-if(input == 2)
-{
-				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
-
-				deplacer_perso(&perso,event);
-				else 
-				{
-				scrolling(&ba,2);	
-				scrolling(&bm,2);
-				//collision(screen,&perso);
-				}
-input =0;
-}
-
-if(input == 3)
-{
-				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
-
-                                deplacer_perso(&perso,event);
 	
-				else			
-				scrolling(&ba,3);		
-				scrolling(&bm,3);
-				//collision(screen,&perso);
-input =0;
-}
-
-if(input == 4)
-{
-				if( (collisionparfaite(screen,perso))==10 && (perso.pos_perso.x==(ba.camera2.x/2)))
-
-				deplacer_perso(&perso,event);
-				else 
-				scrolling(&ba,4);		
-				scrolling(&bm,4);
-				//collision(screen,&perso);
-input =0;
-			
-			
-}
-}
-	/*free_perso(perso);
-	SDL_FreeSurface(screen);
-	SDL_FreeSurface(ba);
-	SDL_FreeSurface(bm);*/
 	SDL_Quit();
 
 	return 1;
